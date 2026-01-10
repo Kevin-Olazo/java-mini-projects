@@ -25,13 +25,18 @@ public class Book {
         if (!isAvailable) {
             System.out.println("Book isn't available");
         } else { // If not available (false), then we lend the book and set it false
-            System.out.println("Borrowing " + title);
+            System.out.println("Borrowing the book titled: " + title);
             setAvailable(false);
         }
     }
 
     public void returnBook() {
-
+        if (isAvailable) {
+            System.out.println("Book already available");
+        } else {
+            System.out.println("Returning book titled: " + title);
+            setAvailable(true);
+        }
     }
 
     public void setTitle(String title) {

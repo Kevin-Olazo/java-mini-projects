@@ -21,14 +21,17 @@ public class Book {
 
     // Custom method to borrow book.
     public void borrowBook() {
-        // Check if isAvailable (true) first
-        if (isAvailable) {
-            // If isAvailable then set false
-            this.isAvailable = false;
-
-        } else { // If not available (false) let the user know
+        // Check if isAvailable is false first
+        if (!isAvailable) {
             System.out.println("Book isn't available");
+        } else { // If not available (false), then we lend the book and set it false
+            System.out.println("Borrowing " + title);
+            setAvailable(false);
         }
+    }
+
+    public void returnBook() {
+
     }
 
     public void setTitle(String title) {
@@ -43,8 +46,9 @@ public class Book {
         // Validation for title, if empty or null set "Unknown author" as default
         if (author == null || author.trim().isEmpty()) {
             this.author = "Unknown author";
+        } else {
+            this.author = author;
         }
-        this.author = author;
     }
 
     public void setAvailable(boolean available) {

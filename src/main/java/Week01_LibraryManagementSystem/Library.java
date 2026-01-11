@@ -13,8 +13,8 @@ public class Library {
     }
 
     public Library(List<Book> bookList, List<Member> memberList) {
-        this.bookList = bookList;
-        this.memberList = memberList;
+        this.bookList = new ArrayList<>(bookList);
+        this.memberList = new ArrayList<>(memberList);
     }
 
     public void addBook(Book book) {

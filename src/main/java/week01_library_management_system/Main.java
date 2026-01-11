@@ -26,7 +26,6 @@ public class Main {
 
         library.registerMember(member1);
 
-
         // Code if List in member was public
         // If booksBorrowed is public, I can completely bypass your "Gatekeeper" method (borrowBook).
         // I don't need to ask permission; I just swap out the entire memory of the object with my own data.

@@ -8,12 +8,15 @@ public class Member {
     // Private fields
     private final String memberId;
     private String name;
-    public List<Book> booksBorrowed;
+    private List<Book> booksBorrowed;
+
+    // NO MAGIC NUMBERS
+    private static final int MAX_BORROW_LIMIT = 3;
 
     // Constructor
     public Member(String name) {
         this.memberId = UUID.randomUUID().toString();
-        if (name == null || name.trim().isEmpty()){
+        if (name == null || name.isBlank()){
             throw new IllegalArgumentException("Name cannot be empty or null");
         }
         this.name = name;
@@ -24,7 +27,7 @@ public class Member {
         if (!book.isAvailable()) {
             System.out.println("Book is not available.");
             return;
-        } else if (booksBorrowed.size() < 3) {
+        } else if (booksBorrowed.size() < MAX_BORROW_LIMIT) {
             book.borrowBook();
             booksBorrowed.add(book);
         } else {

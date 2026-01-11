@@ -1,4 +1,4 @@
-package Week01_LibraryManagementSystem;
+package week01_library_management_system;
 
 public class Book {
     // Private fields

@@ -1,4 +1,4 @@
-package Week01_LibraryManagementSystem;
+package week01_library_management_system;
 
 import java.util.ArrayList;
 import java.util.List;

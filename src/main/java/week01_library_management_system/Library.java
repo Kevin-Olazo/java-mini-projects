@@ -1,4 +1,4 @@
-package Week01_LibraryManagementSystem;
+package week01_library_management_system;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class Library {
 
     public void registerMember(Member member) {
         if (member == null) {
-            throw new IllegalArgumentException("Book cannot be null");
+            throw new IllegalArgumentException("Member cannot be null");
         }
         memberList.add(member);
     }

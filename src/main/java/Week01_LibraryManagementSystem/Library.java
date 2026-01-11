@@ -18,6 +18,9 @@ public class Library {
     }
 
     public void addBook(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Book cannot be null");
+        }
         bookList.add(book);
     }
 
@@ -33,6 +36,13 @@ public class Library {
         }
 
         return null;
+    }
+
+    public void registerMember(Member member) {
+        if (member == null) {
+            throw new IllegalArgumentException("Book cannot be null");
+        }
+        memberList.add(member);
     }
 
     public List<Book> getBookList() {

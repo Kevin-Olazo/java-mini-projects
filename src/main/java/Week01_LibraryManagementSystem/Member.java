@@ -2,6 +2,7 @@ package Week01_LibraryManagementSystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Member {
     // Private fields
@@ -11,16 +12,19 @@ public class Member {
 
     // Constructor
     public Member(String memberId, String name) {
-        this.memberId = memberId;
+        this.memberId = UUID.randomUUID().toString();
+        if (name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("Name cannot be empty or null");
+        }
         this.name = name;
         this.booksBorrowed = new ArrayList<>();
     }
 
     public void borrowBook(Book book) {
-        // TODO FIX "MISLEADING BUG"
-        // if array size is < 3, but book is NOT available, will jump to else
-        // and show the message that, even array
-        if (booksBorrowed.size() < 3 && book.isAvailable()) {
+        if (!book.isAvailable()) {
+            System.out.println("Book is not available.");
+            return;
+        } else if (booksBorrowed.size() < 3) {
             book.borrowBook();
             booksBorrowed.add(book);
         } else {
@@ -28,4 +32,16 @@ public class Member {
         }
     }
 
+    public void returnBook(Book book) {
+        booksBorrowed.remove(book);
+        book.returnBook();
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

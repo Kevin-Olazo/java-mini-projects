@@ -11,7 +11,7 @@ public class Member {
     private List<Book> booksBorrowed;
 
     // Constructor
-    public Member(String memberId, String name) {
+    public Member(String name) {
         this.memberId = UUID.randomUUID().toString();
         if (name == null || name.trim().isEmpty()){
             throw new IllegalArgumentException("Name cannot be empty or null");
@@ -33,8 +33,13 @@ public class Member {
     }
 
     public void returnBook(Book book) {
-        booksBorrowed.remove(book);
-        book.returnBook();
+        if (booksBorrowed.remove(book)){
+            book.returnBook();
+        } else {
+            System.out.println("You haven't borrowed that book");
+        }
+
+
     }
 
     public String getMemberId() {

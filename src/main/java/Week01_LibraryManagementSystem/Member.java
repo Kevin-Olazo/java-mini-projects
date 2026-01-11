@@ -38,8 +38,6 @@ public class Member {
         } else {
             System.out.println("You haven't borrowed that book");
         }
-
-
     }
 
     public String getMemberId() {

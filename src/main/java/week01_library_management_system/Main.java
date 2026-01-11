@@ -1,5 +1,8 @@
 package week01_library_management_system;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -22,6 +25,20 @@ public class Main {
         Member member1 = new Member("Alice");
 
         library.registerMember(member1);
+
+
+        // Code if List in member was public
+        // If booksBorrowed is public, I can completely bypass your "Gatekeeper" method (borrowBook).
+        // I don't need to ask permission; I just swap out the entire memory of the object with my own data.
+
+    //        List<Book> booksOverLimit = new ArrayList<>();
+    //        booksOverLimit.add(book1);
+    //        booksOverLimit.add(book2);
+    //        booksOverLimit.add(book3);
+    //        booksOverLimit.add(book4);
+    //        //
+    //        // Add 100 books to booksOverLimit
+    //        member1.booksBorrowed = booksOverLimit;
 
         // 4. Member borrows books
         member1.borrowBook(book1);

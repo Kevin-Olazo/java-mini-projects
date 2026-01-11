@@ -8,7 +8,7 @@ public class Member {
     // Private fields
     private final String memberId;
     private String name;
-    private List<Book> booksBorrowed;
+    public List<Book> booksBorrowed;
 
     // Constructor
     public Member(String name) {

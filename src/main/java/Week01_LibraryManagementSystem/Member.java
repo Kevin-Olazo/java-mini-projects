@@ -17,6 +17,9 @@ public class Member {
     }
 
     public void borrowBook(Book book) {
+        // TODO FIX "MISLEADING BUG"
+        // if array size is < 3, but book is NOT available, will jump to else
+        // and show the message that, even array
         if (booksBorrowed.size() < 3 && book.isAvailable()) {
             book.borrowBook();
             booksBorrowed.add(book);

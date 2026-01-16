@@ -32,4 +32,10 @@ public class BankAccount {
         }
         this.balance = this.balance - amount;
     }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+
 }

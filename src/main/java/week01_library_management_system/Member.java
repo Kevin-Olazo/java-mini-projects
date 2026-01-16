@@ -23,24 +23,27 @@ public class Member {
         this.booksBorrowed = new ArrayList<>();
     }
 
-    public void borrowBook(Book book) {
+    public boolean borrowBook(Book book) {
         if (!book.isAvailable()) {
-            System.out.println("Book is not available.");
-            return;
-        } else if (booksBorrowed.size() < MAX_BORROW_LIMIT) {
+            return false;
+        }
+
+        if (booksBorrowed.size() < MAX_BORROW_LIMIT) {
             book.borrowBook();
             booksBorrowed.add(book);
-        } else {
-            System.out.println("You have reached the limit of books you can borrow (3).");
+            return true;
         }
+
+        return false;
     }
 
-    public void returnBook(Book book) {
+    public boolean returnBook(Book book) {
         if (booksBorrowed.remove(book)){
             book.returnBook();
-        } else {
-            System.out.println("You haven't borrowed that book");
+            return true;
         }
+        return false;
+
     }
 
     public String getMemberId() {

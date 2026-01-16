@@ -20,13 +20,13 @@ public class Book {
     }
 
     // Custom method to borrow book.
-    public void borrowBook() {
+    public boolean borrowBook() {
         // Check if isAvailable is false first
         if (!isAvailable) {
-            System.out.println("Book isn't available");
-        } else { // If not available (false), then we lend the book and set it false
-            System.out.println("Borrowing the book titled: " + title);
+            return false;
+        } else { // If available (true), then we lend the book and set it false
             setAvailable(false);
+            return true;
         }
     }
 

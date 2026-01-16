@@ -37,5 +37,13 @@ public class BankAccount {
         System.out.println("Current Balance: " + balance);
     }
 
+    public void changePIN(int oldPIN, int newPIN) {
+        if (oldPIN != this.PIN){
+            throw new IllegalArgumentException("Error. Wrong PIN number");
+        }
+
+        this.PIN = newPIN;
+    }
+
 
 }

@@ -17,10 +17,19 @@ public class BankAccount {
 
     // PUBLIC METHODS
     public void deposit(double amount) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Error. Enter a valid amount to deposit");
 
+        }
+        this.balance = this.balance + amount;
     }
 
     public void withdraw(double amount) {
-
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Error. Enter a valid amount to withdraw");
+        } else if (amount > this.balance) {
+            throw new IllegalArgumentException("Error. Not enough funds.");
+        }
+        this.balance = this.balance - amount;
     }
 }

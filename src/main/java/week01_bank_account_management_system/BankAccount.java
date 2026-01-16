@@ -33,8 +33,13 @@ public class BankAccount {
         this.balance = this.balance - amount;
     }
 
-    public void checkBalance() {
-        System.out.println("Current Balance: " + balance);
+    public void checkBalance(int PIN) {
+        if (PIN == this.PIN){
+            System.out.println("Current Balance: " + balance);
+        } else {
+            System.out.println("Wrong pin");
+        }
+
     }
 
     public void changePIN(int oldPIN, int newPIN) {

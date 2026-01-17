@@ -147,16 +147,34 @@ public class BankSystem {
     public void depositMoney() {
 
         System.out.println("Enter number account:");
+        scanner.nextLine(); // Limpiamos el buffer por si llegamos de un nextInt anterior
         String accNumber = scanner.nextLine();
 
         BankAccount account = findBankAccount(accNumber);
 
         if (account != null) {
             System.out.println("Enter the amount to deposit:");
-            double amount = scanner.nextDouble();
 
-            account.deposit(amount);
-            System.out.println("Deposited $" + amount + " to " + account.getAccountNumber());
+            // Validamos que sea número antes de leer
+            if (scanner.hasNextDouble()){
+                double amount = scanner.nextDouble();
+
+                // PROTEGEMOS EL CODIGO CON TRY-CATCH
+                try {
+                    account.deposit(amount);
+                    System.out.println("Deposited $" + amount + " to " + account.getAccountNumber());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Transaction failed: " + e.getMessage());
+                }
+
+
+            } else {
+                System.out.println("Invalid number");
+                scanner.next();
+            }
+
+
+
         } else {
             System.out.println("Account not found");
         }

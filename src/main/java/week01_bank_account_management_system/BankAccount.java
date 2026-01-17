@@ -21,7 +21,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Error. Enter a valid amount to deposit");
 
         }
-        this.balance  += amount;
+        this.balance += amount;
     }
 
     public void withdraw(double amount) {

@@ -56,6 +56,7 @@ public class BankSystem {
         }
 
         scanner.close();
+        system.scanner.close();
 
     }
 
@@ -145,7 +146,6 @@ public class BankSystem {
 
 
     public void depositMoney() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
@@ -166,7 +166,6 @@ public class BankSystem {
     }
 
     public void withdrawMoney() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
@@ -186,7 +185,6 @@ public class BankSystem {
     }
 
     public void checkBalance() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
@@ -208,7 +206,6 @@ public class BankSystem {
     //
 
     public void changePIN() {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();

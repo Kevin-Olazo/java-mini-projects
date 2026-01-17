@@ -147,17 +147,10 @@ public class BankSystem {
         while (!isValid) {
 
             System.out.println("Enter your PIN: ");
-
             if (scanner.hasNextInt()) {
-
                 pin = scanner.nextInt();
-
-                if (pin < 0) {
-                    System.out.println("PIN cannot be negative");
-                    continue;
-                }
-
-                if (pin < 1000) {
+                scanner.nextLine();
+                if (pin < 999) {
                     System.out.println("PIN must be at least 4 digits");
                     continue;
                 }
@@ -168,7 +161,6 @@ public class BankSystem {
             }
         }
 
-        scanner.nextLine();
 
         // Retornamos una nueva cuenta con los datos ingresados
         registerAccount(new BankAccount(accountNumber, name, balance, pin));
@@ -334,6 +326,5 @@ public class BankSystem {
             System.out.println(ba.toString());
         }
     }
-
 
 }

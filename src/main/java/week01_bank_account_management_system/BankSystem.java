@@ -180,32 +180,27 @@ public class BankSystem {
             return;
         }
 
-        if (account != null) {
-            System.out.println("Enter the amount to deposit:");
+        System.out.println("Enter the amount to deposit:");
 
-            // Validamos que sea número antes de leer
-            if (scanner.hasNextDouble()) {
-                double amount = scanner.nextDouble();
+        // Validamos que sea número antes de leer
+        if (scanner.hasNextDouble()) {
+            double amount = scanner.nextDouble();
 
-                // PROTEGEMOS EL CODIGO CON TRY-CATCH
-                try {
-                    account.deposit(amount);
-                    System.out.println("Deposited $" + amount + " to " + account.getAccountNumber());
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Transaction failed: " + e.getMessage());
-                }
-
-
-            } else {
-                System.out.println("Invalid number");
-                scanner.next();
+            // PROTEGEMOS EL CODIGO CON TRY-CATCH
+            try {
+                account.deposit(amount);
+                System.out.println("Deposited $" + amount + " to " + account.getAccountNumber());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Transaction failed: " + e.getMessage());
             }
 
+
         } else {
-            System.out.println("Account not found");
+            System.out.println("Invalid number");
+            scanner.next();
         }
 
-        scanner.nextLine();
+
     }
 
     public void withdrawMoney() {
@@ -261,6 +256,35 @@ public class BankSystem {
 
     //
 
+    public void changePIN() {
+        BankAccount account = selectAccount();
+
+        if (account == null) {
+            System.out.println("Account not found");
+            return;
+        }
+
+        System.out.println("Enter your previous PIN");
+        if (scanner.hasNextInt()) {
+            int oldPin = scanner.nextInt();
+            scanner.nextLine();
+            try {
+                if (account.validatePIN(oldPin)) {
+                    System.out.println("Enter your new PIN");
+                    int newPin = scanner.nextInt();
+                    scanner.nextLine();
+                    account.changePin(oldPin, newPin);
+                    System.out.println("PIN updated successfully!");
+                } else {
+                    System.out.println("Wrong PIN");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+
     public BankAccount selectAccount() {
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
@@ -282,36 +306,6 @@ public class BankSystem {
         }
 
         return account.validatePIN(pin);
-    }
-
-    public void changePIN() {
-        BankAccount account = selectAccount();
-
-        if (account == null) {
-            System.out.println("Account not found");
-            return;
-        }
-
-        if (account != null) {
-            System.out.println("Enter your previous PIN");
-            if (scanner.hasNextInt()) {
-                int oldPin = scanner.nextInt();
-                scanner.nextLine();
-                try {
-                    if (account.validatePIN(oldPin)) {
-                        System.out.println("Enter your new PIN");
-                        int newPin = scanner.nextInt();
-                        scanner.nextLine();
-                        account.changePin(oldPin, newPin);
-                        System.out.println("PIN updated successfully!");
-                    } else {
-                        System.out.println("Wrong PIN");
-                    }
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-        }
     }
 
     // SHOW MENU METHOD

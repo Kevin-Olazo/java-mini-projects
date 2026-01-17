@@ -37,7 +37,7 @@ public class BankAccount {
         if (PIN == this.PIN){
             System.out.println("Current Balance: " + balance);
         } else {
-            System.out.println("Wrong pin");
+            System.out.println("Wrong PIN");
         }
 
     }

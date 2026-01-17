@@ -19,7 +19,7 @@ public class BankSystem {
         BankSystem system = new BankSystem();
 
         BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 123);
-        system.getBankAccounts().add(ba1);
+        system.registerAccount(ba1);
 
 
         int option = 0;
@@ -35,10 +35,13 @@ public class BankSystem {
                     system.depositMoney();
                     break;
                 case 3:
-//                    withdrawMoney(bankAccounts);
+                    system.withdrawMoney();
                     break;
                 case 4:
-//                    checkBalance();
+                    system.checkBalance();
+                    break;
+                case 5:
+                    system.changePIN();
                     break;
                 case 6:
                     system.displayAllAccounts();
@@ -122,7 +125,12 @@ public class BankSystem {
         scanner.nextLine();
 
         // Retornamos una nueva cuenta con los datos ingresados
-        bankAccounts.add(new BankAccount(accountNumber, name, balance, PIN));
+        registerAccount(new BankAccount(accountNumber, name, balance, PIN));
+    }
+
+    public void registerAccount(BankAccount account) {
+        if (account != null)
+            bankAccounts.add(account);
     }
 
 
@@ -164,7 +172,20 @@ public class BankSystem {
     }
 
     public void checkBalance() {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Enter number account:");
+        String accNumber = scanner.nextLine();
+
+        BankAccount account = findBankAccount(accNumber);
+
+        if (account != null) {
+            System.out.println("Enter your PIN:");
+            int pin = scanner.nextInt();
+            account.checkBalance(pin);
+        } else {
+            System.out.println("Account not found");
+        }
     }
 
     // SHOW MENU METHOD
@@ -195,4 +216,6 @@ public class BankSystem {
             System.out.println(ba.toString());
         }
     }
+
+
 }

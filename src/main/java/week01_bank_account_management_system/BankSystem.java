@@ -68,7 +68,7 @@ public class BankSystem {
     // Registramos un nuevo usuario
 
     public void registerNewAccount() {
-       // Creamos un boolean para utilizar en los bucles
+        // Creamos un boolean para utilizar en los bucles
         boolean isValid = false;
 
         String accountNumber = "";
@@ -192,7 +192,7 @@ public class BankSystem {
             System.out.println("Enter the amount to deposit:");
 
             // Validamos que sea número antes de leer
-            if (scanner.hasNextDouble()){
+            if (scanner.hasNextDouble()) {
                 double amount = scanner.nextDouble();
 
                 // PROTEGEMOS EL CODIGO CON TRY-CATCH
@@ -231,7 +231,7 @@ public class BankSystem {
 
                 try {
                     account.withdraw(amount);
-                    System.out.println("Successfully withdraw $" +  amount);
+                    System.out.println("Successfully withdraw $" + amount);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -259,14 +259,9 @@ public class BankSystem {
             if (scanner.hasNextInt()) {
                 int pin = scanner.nextInt();
                 scanner.nextLine();
-                try {
-                    if (account.validatePIN(pin)) {
-                        account.checkBalance();
-                    }
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
+                if (account.validatePIN(pin)) {
+                    account.checkBalance();
                 }
-
             } else {
                 System.out.println("Enter a valid PIN number");
             }
@@ -287,7 +282,7 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter your previous PIN");
-            if (scanner.hasNextInt()){
+            if (scanner.hasNextInt()) {
                 int oldPin = scanner.nextInt();
                 scanner.nextLine();
                 try {
@@ -304,7 +299,6 @@ public class BankSystem {
                     System.out.println(e.getMessage());
                 }
             }
-
 
 
         }

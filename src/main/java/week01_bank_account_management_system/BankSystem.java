@@ -7,7 +7,7 @@ public class BankSystem {
     ArrayList<BankAccount> bankAccounts;
 
     public BankSystem() {
-       this.bankAccounts = new ArrayList<>();
+        this.bankAccounts = new ArrayList<>();
     }
 
     public static void main(String[] args) {
@@ -32,16 +32,16 @@ public class BankSystem {
                     system.registerNewAccount();
                     break;
                 case 2:
-                    depositMoney(bankAccounts);
+                    system.depositMoney();
                     break;
                 case 3:
-                   withdrawMoney(bankAccounts);
+//                    withdrawMoney(bankAccounts);
                     break;
                 case 4:
-                    checkBalance();
+//                    checkBalance();
                     break;
                 case 6:
-//                    displayAllAccounts();
+                    system.displayAllAccounts();
                     break;
                 case 7:
 //                    exit();
@@ -122,63 +122,50 @@ public class BankSystem {
         scanner.nextLine();
 
         // Retornamos una nueva cuenta con los datos ingresados
-       bankAccounts.add(new BankAccount(accountNumber, name, balance, PIN)) ;
+        bankAccounts.add(new BankAccount(accountNumber, name, balance, PIN));
     }
 
 
-    public void depositMoney(ArrayList<BankAccount> bankAccounts) {
+    public void depositMoney() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
-        BankAccount ba = null;
+        System.out.println("Enter number account");
+        String accNumber = scanner.nextLine();
 
-        String accountNumber = scanner.nextLine();
-
-        for (BankAccount bas : bankAccounts) {
-            if (accountNumber.equals(bas.getAccountNumber())) {
-                ba = bas;
-                break;
-            } else {
-                System.out.println("No existe ese numero de cuenta");
-            }
-        }
-
-        if (ba != null) {
-            System.out.println("Escribe el monto a depositar:");
+        if (findBankAccount(accNumber) != null) {
+            scanner.nextLine();
+            System.out.println("Enter the amount to deposit:");
             double amount = scanner.nextDouble();
-            ba.deposit(amount);
+            findBankAccount(accNumber).deposit(amount);
+        } else {
+            System.out.println("Account not found");
         }
+
+
         scanner.nextLine();
 
     }
 
-    public void withdrawMoney(ArrayList<BankAccount> bankAccounts) {
+    public void withdrawMoney() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
-        BankAccount ba = null;
 
-        String accountNumber = scanner.nextLine();
+        String accNumber = scanner.nextLine();
 
-        for (BankAccount bas : bankAccounts) {
-            if (accountNumber.equals(bas.getAccountNumber())) {
-                ba = bas;
-                break;
-            } else {
-                System.out.println("No existe ese numero de cuenta");
-            }
-        }
+        BankAccount account = findBankAccount(accNumber);
 
-        if (ba != null) {
-            System.out.println("Escribe el monto a retirar:");
+        if (account != null) {
+            System.out.println("Enter the amount to withdraw:");
             double amount = scanner.nextDouble();
-            ba.withdraw(amount);
-        }
-        scanner.nextLine();
 
+            findBankAccount(accNumber).withdraw(amount);
+        } else {
+            System.out.println("Account not found");
+        }
     }
 
-    public void checkBalance(){
+    public void checkBalance() {
 
     }
 
@@ -203,6 +190,12 @@ public class BankSystem {
             }
         }
         return null;
+    }
+
+    public void displayAllAccounts() {
+        for (BankAccount ba : bankAccounts) {
+            System.out.println(ba.toString());
+        }
     }
 
     public ArrayList<BankAccount> getBankAccounts() {

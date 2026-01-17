@@ -247,16 +247,10 @@ public class BankSystem {
         BankAccount account = findBankAccount(accNumber);
 
         if (account != null) {
-            System.out.println("Enter your PIN:");
-            if (scanner.hasNextInt()) {
-                int pin = scanner.nextInt();
-                scanner.nextLine();
-                if (account.validatePIN(pin)) {
-                    account.checkBalance();
-                }
-            } else {
-                System.out.println("Enter a valid PIN number");
+            if (checkPin(account)) {
+                account.checkBalance();
             }
+
         } else {
             System.out.println("Account not found");
         }
@@ -265,12 +259,37 @@ public class BankSystem {
 
     //
 
+    public BankAccount selectAccount() {
+        System.out.println("Enter number account:");
+        String accNumber = scanner.nextLine();
+        BankAccount account = findBankAccount(accNumber);
+        return account;
+    }
+
+
+    public boolean checkPin(BankAccount account) {
+        System.out.println("Enter your PIN");
+        int pin = 0;
+        try {
+            pin = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Enter a valid PIN number");
+            checkPin(account);
+        }
+        return account.validatePIN(pin);
+    }
+
     public void changePIN() {
 
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
 
         BankAccount account = findBankAccount(accNumber);
+
+        if (account == null) {
+            System.out.println();
+        }
 
         if (account != null) {
             System.out.println("Enter your previous PIN");
@@ -291,11 +310,7 @@ public class BankSystem {
                     System.out.println(e.getMessage());
                 }
             }
-
-
         }
-
-
     }
 
     // SHOW MENU METHOD

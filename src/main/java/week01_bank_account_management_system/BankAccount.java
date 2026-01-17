@@ -39,14 +39,16 @@ public class BankAccount {
     }
 
     public void changePin(int oldPin, int newPin) {
-
-
         if (validatePIN(oldPin)){
             if (newPin < 1000) {
                 throw new IllegalArgumentException("Pin must be at least 4 digits");
             }
             this.pin = newPin;
         }
+    }
+
+    public boolean validatePIN(int pin) {
+        return pin == this.pin;
     }
 
 
@@ -58,9 +60,6 @@ public class BankAccount {
         return holderName;
     }
 
-    public boolean validatePIN(int pin) {
-        return pin == this.pin;
-    }
 
     @Override
     public String toString() {

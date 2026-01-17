@@ -18,7 +18,7 @@ public class BankSystem {
 
         BankSystem system = new BankSystem();
 
-        BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 123);
+        BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 1234);
         system.registerAccount(ba1);
 
 
@@ -160,6 +160,8 @@ public class BankSystem {
         } else {
             System.out.println("Account not found");
         }
+
+        scanner.nextLine();
     }
 
     public void withdrawMoney() {
@@ -178,6 +180,8 @@ public class BankSystem {
         } else {
             System.out.println("Account not found");
         }
+
+        scanner.nextLine();
     }
 
     public void checkBalance() {
@@ -191,10 +195,13 @@ public class BankSystem {
         if (account != null) {
             System.out.println("Enter your PIN:");
             int pin = scanner.nextInt();
-            account.checkBalance(pin);
+            if (account.validatePIN(pin)) {
+                account.checkBalance();
+            }
         } else {
             System.out.println("Account not found");
         }
+
     }
 
     //

@@ -28,9 +28,6 @@ public class BankSystem {
         }
 
 
-        System.out.println(option);
-
-
     }
 
     // REGISTER NEW ACCOUNT METHOD
@@ -50,15 +47,24 @@ public class BankSystem {
         System.out.println("Enter name: ");
         String name = scanner.nextLine();
 
+        // Inicializamos balance como 0.0
         double balance = 0.00;
+
+        // Creamos un boolean para utilizar en los bucles
         boolean isValid = false;
 
+        // Creamos un while loop, mientras que el usuario ingrese un valor inválido, se repetirá el loop
         while (!isValid) {
 
             System.out.println("Enter balance: ");
 
             if (scanner.hasNextDouble()) {
                 balance = scanner.nextDouble();
+                if (balance < 0) {
+                    System.out.println("Balance cannot be negative.");
+                    scanner.next();
+                    continue;
+                }
                 isValid = true;
             } else {
                 System.out.println("Enter a valid number");
@@ -66,14 +72,25 @@ public class BankSystem {
             }
         }
 
+        // Regresamos el valor a falso
+        isValid = false;
+
+        // Inicializamos el PIN
         int PIN = 0;
 
+        // Creamos un while loop, mientras que el usuario ingrese un valor inválido, se repetirá el loop
         while (!isValid) {
 
             System.out.println("Enter your PIN: ");
 
             if (scanner.hasNextInt()) {
-                balance = scanner.nextInt();
+
+                PIN = scanner.nextInt();
+                if (PIN <= 0) {
+                    System.out.println("Enter a valid PIN");
+                    scanner.next();
+                    continue;
+                }
                 isValid = true;
             } else {
                 System.out.println("Enter a valid PIN");
@@ -83,11 +100,8 @@ public class BankSystem {
 
         scanner.nextLine();
 
-        scanner.close(); // Cerramos el scanner.
         // Retornamos una nueva cuenta con los datos ingresados
         return new BankAccount(accountNumber, name, balance, PIN);
-
-
     }
 
     // SHOW MENU METHOD

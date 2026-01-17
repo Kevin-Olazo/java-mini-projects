@@ -231,10 +231,15 @@ public class BankSystem {
 
                 try {
                     account.withdraw(amount);
+                    System.out.println("Successfully withdraw $" +  amount);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
+
+            } else {
+                System.out.println("Enter a valid amount to withdraw");
             }
+
         } else {
             System.out.println("Account not found");
         }

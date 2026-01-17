@@ -129,28 +129,26 @@ public class BankSystem {
     public void depositMoney() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter number account");
+        System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
 
-        if (findBankAccount(accNumber) != null) {
-            scanner.nextLine();
+        BankAccount account = findBankAccount(accNumber);
+
+        if (account != null) {
             System.out.println("Enter the amount to deposit:");
             double amount = scanner.nextDouble();
-            findBankAccount(accNumber).deposit(amount);
+
+            account.deposit(amount);
+            System.out.println("Deposited $" + amount + " to " + account.getAccountNumber());
         } else {
             System.out.println("Account not found");
         }
-
-
-        scanner.nextLine();
-
     }
 
     public void withdrawMoney() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
-
+        System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
 
         BankAccount account = findBankAccount(accNumber);
@@ -159,7 +157,7 @@ public class BankSystem {
             System.out.println("Enter the amount to withdraw:");
             double amount = scanner.nextDouble();
 
-            findBankAccount(accNumber).withdraw(amount);
+            account.withdraw(amount);
         } else {
             System.out.println("Account not found");
         }
@@ -196,9 +194,5 @@ public class BankSystem {
         for (BankAccount ba : bankAccounts) {
             System.out.println(ba.toString());
         }
-    }
-
-    public ArrayList<BankAccount> getBankAccounts() {
-        return bankAccounts;
     }
 }

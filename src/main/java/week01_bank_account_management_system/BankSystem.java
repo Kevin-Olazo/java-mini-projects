@@ -105,7 +105,7 @@ public class BankSystem {
         isValid = false;
 
         // Inicializamos el PIN
-        int PIN = 0;
+        int pin = 0;
 
         // Creamos un while loop, mientras que el usuario ingrese un valor inválido, se repetirá el loop
         while (!isValid) {
@@ -114,15 +114,14 @@ public class BankSystem {
 
             if (scanner.hasNextInt()) {
 
-                PIN = scanner.nextInt();
+                pin = scanner.nextInt();
 
-                if (PIN < 0) {
+                if (pin < 0) {
                     System.out.println("PIN cannot be negative");
                     continue;
                 }
 
-
-                if (PIN < 1000) {
+                if (pin < 1000) {
                     System.out.println("PIN must be at least 4 digits");
                     continue;
                 }
@@ -136,7 +135,7 @@ public class BankSystem {
         scanner.nextLine();
 
         // Retornamos una nueva cuenta con los datos ingresados
-        registerAccount(new BankAccount(accountNumber, name, balance, PIN));
+        registerAccount(new BankAccount(accountNumber, name, balance, pin));
     }
 
     public void registerAccount(BankAccount account) {
@@ -214,11 +213,11 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter your previous PIN");
-            int oldPIN = scanner.nextInt();
-            if (account.validatePIN(oldPIN)) {
+            int oldPin = scanner.nextInt();
+            if (account.validatePIN(oldPin)) {
                 System.out.println("Enter your new PIN");
-                int newPIN = scanner.nextInt();
-                account.changePIN(oldPIN, newPIN);
+                int newPin = scanner.nextInt();
+                account.changePin(oldPin, newPin);
                 System.out.println("PIN updated successfully!");
             } else {
                 System.out.println("Wrong PIN");

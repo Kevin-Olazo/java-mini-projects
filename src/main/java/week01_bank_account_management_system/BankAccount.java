@@ -5,14 +5,14 @@ public class BankAccount {
     private String accountNumber;
     private String holderName;
     private double balance;
-    private int PIN;
+    private int pin;
 
     // CONSTRUCTOR
-    public BankAccount(String accountNumber, String holderName, double balance, int PIN) {
+    public BankAccount(String accountNumber, String holderName, double balance, int pin) {
         this.accountNumber = accountNumber;
         this.holderName = holderName;
         this.balance = balance;
-        this.PIN = PIN;
+        this.pin = pin;
     }
 
     // PUBLIC METHODS
@@ -21,7 +21,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Error. Enter a valid amount to deposit");
 
         }
-        this.balance = this.balance + amount;
+        this.balance  += amount;
     }
 
     public void withdraw(double amount) {
@@ -30,7 +30,7 @@ public class BankAccount {
         } else if (amount > this.balance) {
             throw new IllegalArgumentException("Error. Not enough funds.");
         }
-        this.balance = this.balance - amount;
+        this.balance -= amount;
     }
 
     public void checkBalance() {
@@ -38,9 +38,9 @@ public class BankAccount {
 
     }
 
-    public void changePIN(int oldPIN, int newPIN) {
-        if (validatePIN(oldPIN)){
-            this.PIN = newPIN;
+    public void changePin(int oldPin, int newPin) {
+        if (validatePIN(oldPin)){
+            this.pin = newPin;
         }
     }
 
@@ -54,7 +54,7 @@ public class BankAccount {
     }
 
     public boolean validatePIN(int pin) {
-        return pin == this.PIN;
+        return pin == this.pin;
     }
 
     @Override

@@ -4,26 +4,32 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BankSystem {
+    ArrayList<BankAccount> bankAccounts;
+
+    public BankSystem() {
+       this.bankAccounts = new ArrayList<>();
+    }
 
     public static void main(String[] args) {
         // Creamos una lista de las cuentas
-        ArrayList<BankAccount> bankAccounts = new ArrayList<>();
 
         // Creamos un nuevo scanner para recibir los datos del usuario
         Scanner scanner = new Scanner(System.in);
 
+        BankSystem system = new BankSystem();
+
         BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 123);
-        bankAccounts.add(ba1);
+        system.getBankAccounts().add(ba1);
+
 
         int option = 0;
 
         while (option != 7) {
-            showMenu();
+            system.showMenu();
             option = scanner.nextInt();
             switch (option) {
                 case 1:
-                    BankAccount newAccount = registerNewAccount();
-                    bankAccounts.add(newAccount);
+                    system.registerNewAccount();
                     break;
                 case 2:
                     depositMoney(bankAccounts);
@@ -32,7 +38,7 @@ public class BankSystem {
                    withdrawMoney(bankAccounts);
                     break;
                 case 4:
-//                    checkBalance();
+                    checkBalance();
                     break;
                 case 6:
 //                    displayAllAccounts();
@@ -50,11 +56,9 @@ public class BankSystem {
     // REGISTER NEW ACCOUNT METHOD
     // Registramos un nuevo usuario
 
-    public static BankAccount registerNewAccount() {
+    public void registerNewAccount() {
         // Creamos un scanner
         Scanner scanner = new Scanner(System.in);
-
-        // try-catch
 
         // Ingresamos el numero de cuenta
         System.out.println("Enter account number: ");
@@ -118,11 +122,11 @@ public class BankSystem {
         scanner.nextLine();
 
         // Retornamos una nueva cuenta con los datos ingresados
-        return new BankAccount(accountNumber, name, balance, PIN);
+       bankAccounts.add(new BankAccount(accountNumber, name, balance, PIN)) ;
     }
 
 
-    public static void depositMoney(ArrayList<BankAccount> bankAccounts) {
+    public void depositMoney(ArrayList<BankAccount> bankAccounts) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
@@ -148,7 +152,7 @@ public class BankSystem {
 
     }
 
-    public static void withdrawMoney(ArrayList<BankAccount> bankAccounts) {
+    public void withdrawMoney(ArrayList<BankAccount> bankAccounts) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
@@ -174,9 +178,13 @@ public class BankSystem {
 
     }
 
+    public void checkBalance(){
+
+    }
+
     // SHOW MENU METHOD
     // Mostramos las opciones al usuario
-    public static void showMenu() {
+    public void showMenu() {
         System.out.println("====== MENU =======");
         System.out.println("1. Create new account");
         System.out.println("2. Deposit money");
@@ -188,4 +196,7 @@ public class BankSystem {
         System.out.println("Choose an option: (1-7)");
     }
 
+    public ArrayList<BankAccount> getBankAccounts() {
+        return bankAccounts;
+    }
 }

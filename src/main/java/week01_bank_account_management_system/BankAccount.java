@@ -59,6 +59,10 @@ public class BankAccount {
         return holderName;
     }
 
+    public int getPIN() {
+        return PIN;
+    }
+
     @Override
     public String toString() {
         return "Account number: " + getAccountNumber() + " Account holder: " + getHolderName();

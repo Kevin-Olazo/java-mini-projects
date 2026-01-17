@@ -47,8 +47,9 @@ public class BankSystem {
                     system.displayAllAccounts();
                     break;
                 case 7:
-//                    exit();
                     break;
+                default:
+                    System.out.println("Enter a valid option (1-7)");
             }
         }
 
@@ -186,6 +187,33 @@ public class BankSystem {
         } else {
             System.out.println("Account not found");
         }
+    }
+
+    //
+
+    public void changePIN() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter number account:");
+        String accNumber = scanner.nextLine();
+
+        BankAccount account = findBankAccount(accNumber);
+
+        if (account != null) {
+            System.out.println("Enter your previous PIN");
+            int oldPIN = scanner.nextInt();
+            if (oldPIN == account.getPIN()) {
+                System.out.println("Enter your new PIN");
+                int newPIN = scanner.nextInt();
+                account.changePIN(oldPIN, newPIN);
+                System.out.println("PIN updated successfully!");
+            } else {
+                System.out.println("Wrong PIN");
+            }
+
+        }
+
+
     }
 
     // SHOW MENU METHOD

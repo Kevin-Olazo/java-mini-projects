@@ -256,9 +256,8 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter your PIN:");
-            int pin = 0;
             if (scanner.hasNextInt()) {
-                pin = scanner.nextInt();
+                int pin = scanner.nextInt();
                 scanner.nextLine();
                 try {
                     if (account.validatePIN(pin)) {
@@ -288,15 +287,25 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter your previous PIN");
-            int oldPin = scanner.nextInt();
-            if (account.validatePIN(oldPin)) {
-                System.out.println("Enter your new PIN");
-                int newPin = scanner.nextInt();
-                account.changePin(oldPin, newPin);
-                System.out.println("PIN updated successfully!");
-            } else {
-                System.out.println("Wrong PIN");
+            if (scanner.hasNextInt()){
+                int oldPin = scanner.nextInt();
+                scanner.nextLine();
+                try {
+                    if (account.validatePIN(oldPin)) {
+                        System.out.println("Enter your new PIN");
+                        int newPin = scanner.nextInt();
+                        scanner.nextLine();
+                        account.changePin(oldPin, newPin);
+                        System.out.println("PIN updated successfully!");
+                    } else {
+                        System.out.println("Wrong PIN");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
             }
+
+
 
         }
 

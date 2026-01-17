@@ -15,9 +15,6 @@ public class BankSystem {
     public static void main(String[] args) {
         // Creamos una lista de las cuentas
 
-        // Creamos un nuevo scanner para recibir los datos del usuario
-        Scanner scanner = new Scanner(System.in);
-
         BankSystem system = new BankSystem();
 
         BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 1234);
@@ -29,11 +26,11 @@ public class BankSystem {
         while (option != 7) {
             system.showMenu();
 
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                scanner.nextLine();
+            if (system.scanner.hasNextInt()) {
+                option = system.scanner.nextInt();
+                system.scanner.nextLine();
             } else {
-                scanner.nextLine();
+                system.scanner.nextLine();
                 System.out.println("Enter a valid option (1-7)");
                 continue;
             }
@@ -63,7 +60,6 @@ public class BankSystem {
             }
         }
 
-        scanner.close();
         system.scanner.close();
 
     }
@@ -229,9 +225,16 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter the amount to withdraw:");
-            double amount = scanner.nextDouble();
 
-            account.withdraw(amount);
+            if (scanner.hasNextDouble()) {
+                double amount = scanner.nextDouble();
+
+                try {
+                    account.withdraw(amount);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
         } else {
             System.out.println("Account not found");
         }

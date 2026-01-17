@@ -28,7 +28,15 @@ public class BankSystem {
 
         while (option != 7) {
             system.showMenu();
-            option = scanner.nextInt();
+
+            if (scanner.hasNextInt()) {
+                option = scanner.nextInt();
+                scanner.nextLine();
+            } else {
+                scanner.nextLine();
+                System.out.println("Enter a valid option (1-7)");
+                continue;
+            }
             switch (option) {
                 case 1:
                     system.registerNewAccount();
@@ -64,25 +72,57 @@ public class BankSystem {
     // Registramos un nuevo usuario
 
     public void registerNewAccount() {
-        // Creamos un scanner
+       // Creamos un boolean para utilizar en los bucles
+        boolean isValid = false;
 
-        // Ingresamos el numero de cuenta
-        System.out.println("Enter account number: ");
-        String accountNumber = scanner.nextLine();
+        String accountNumber = "";
 
-        // Ingresamos el nombre
-        System.out.println("Enter name: ");
-        String name = scanner.nextLine();
+        while (!isValid) {
+            // Ingresamos el numero de cuenta
+            System.out.println("Enter account number: ");
+
+            if (scanner.hasNextLine()) {
+                accountNumber = scanner.nextLine();
+
+                if (accountNumber == null || accountNumber.trim().isEmpty()) {
+                    System.out.println("Enter a valid account number");
+                } else {
+                    isValid = true;
+
+                }
+            }
+
+        }
+
+
+        isValid = false;
+
+        String name = "";
+
+        while (!isValid) {
+            // Ingresamos el numero de cuenta
+            System.out.println("Enter name: ");
+
+            if (scanner.hasNextLine()) {
+                name = scanner.nextLine();
+
+                if (name == null || name.trim().isEmpty()) {
+                    System.out.println("Enter a valid name");
+                } else {
+                    isValid = true;
+
+                }
+            }
+
+        }
+
+        isValid = false;
 
         // Inicializamos balance como 0.0
         double balance = 0.00;
 
-        // Creamos un boolean para utilizar en los bucles
-        boolean isValid = false;
-
         // Creamos un while loop, mientras que el usuario ingrese un valor inválido, se repetirá el loop
         while (!isValid) {
-
             System.out.println("Enter balance: ");
 
             if (scanner.hasNextDouble()) {
@@ -147,7 +187,7 @@ public class BankSystem {
     public void depositMoney() {
 
         System.out.println("Enter number account:");
-        scanner.nextLine(); // Limpiamos el buffer por si llegamos de un nextInt anterior
+
         String accNumber = scanner.nextLine();
 
         BankAccount account = findBankAccount(accNumber);
@@ -172,8 +212,6 @@ public class BankSystem {
                 System.out.println("Invalid number");
                 scanner.next();
             }
-
-
 
         } else {
             System.out.println("Account not found");

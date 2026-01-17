@@ -196,6 +196,15 @@ public class BankSystem {
         System.out.println("Choose an option: (1-7)");
     }
 
+    public BankAccount findBankAccount(String accNumber) {
+        for (BankAccount ba : bankAccounts) {
+            if (ba.getAccountNumber().equals(accNumber)) {
+                return ba;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<BankAccount> getBankAccounts() {
         return bankAccounts;
     }

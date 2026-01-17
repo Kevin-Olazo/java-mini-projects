@@ -113,9 +113,15 @@ public class BankSystem {
             if (scanner.hasNextInt()) {
 
                 PIN = scanner.nextInt();
-                if (PIN <= 0) {
-                    System.out.println("Enter a valid PIN");
-                    scanner.next();
+
+                if (PIN < 0) {
+                    System.out.println("PIN cannot be negative");
+                    continue;
+                }
+
+
+                if (PIN < 1000) {
+                    System.out.println("PIN must be at least 4 digits");
                     continue;
                 }
                 isValid = true;

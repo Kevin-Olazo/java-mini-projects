@@ -24,6 +24,11 @@ public class BankSystem {
             case 1:
                 BankAccount registerAccount = registerNewAccount();
                 bankAccounts.add(registerAccount);
+                break;
+            case 6:
+                for (BankAccount bas : bankAccounts) {
+
+                }
 
         }
 

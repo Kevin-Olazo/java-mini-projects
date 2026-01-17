@@ -58,4 +58,9 @@ public class BankAccount {
     public String getHolderName() {
         return holderName;
     }
+
+    @Override
+    public String toString() {
+        return "Account number: " + getAccountNumber() + " Account holder: " + getHolderName();
+    }
 }

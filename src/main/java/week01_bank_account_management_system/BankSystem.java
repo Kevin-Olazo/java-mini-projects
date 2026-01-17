@@ -12,26 +12,26 @@ public class BankSystem {
         // Creamos un nuevo scanner para recibir los datos del usuario
         Scanner scanner = new Scanner(System.in);
 
-        // Mostramos el menu
-        showMenu();
+        int option = 0;
 
-        // Recibimos la opción del usuario
-        int option = scanner.nextInt();
-        scanner.nextLine(); // clear the buffer
+        while (option != 7) {
+            showMenu();
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    BankAccount newAccount = registerNewAccount();
+                    bankAccounts.add(newAccount);
+                    break;
+                case 2:
+                    depositMoney(bankAccounts);
+                    break;
 
-        // Dependiendo de la opción seleccionada, ejecutamos el método
-        switch (option) {
-            case 1:
-                BankAccount registerAccount = registerNewAccount();
-                bankAccounts.add(registerAccount);
-                break;
-            case 6:
-                for (BankAccount bas : bankAccounts) {
+                case 7:
 
-                }
-
+            }
         }
 
+        scanner.close();
 
     }
 
@@ -109,6 +109,33 @@ public class BankSystem {
         return new BankAccount(accountNumber, name, balance, PIN);
     }
 
+
+    public static void depositMoney(ArrayList<BankAccount> bankAccounts) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
+        BankAccount ba = null;
+
+        String accountNumber = scanner.nextLine();
+
+        for (BankAccount bas : bankAccounts) {
+            if (accountNumber.equals(bas.getAccountNumber())) {
+                ba = bas;
+                break;
+            } else {
+                System.out.println("No existe ese numero de cuenta");
+            }
+        }
+
+        if (ba != null) {
+            System.out.println("Escribe el monto a depositar:");
+            double amount = scanner.nextDouble();
+            ba.deposit(amount);
+        }
+        scanner.nextLine();
+
+    }
+
     // SHOW MENU METHOD
     // Mostramos las opciones al usuario
     public static void showMenu() {
@@ -120,5 +147,7 @@ public class BankSystem {
         System.out.println("5. Change PIN");
         System.out.println("6. Display all accounts");
         System.out.println("7. Exit");
+        System.out.println("Choose an option: (1-7)");
     }
+
 }

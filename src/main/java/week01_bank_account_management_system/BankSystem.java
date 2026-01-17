@@ -87,7 +87,9 @@ public class BankSystem {
                 balance = scanner.nextDouble();
                 if (balance < 0) {
                     System.out.println("Balance cannot be negative.");
-                    scanner.next();
+                    continue;
+                } else if (balance < 100) {
+                    System.out.println("Minimal opening balance must be 100");
                     continue;
                 }
                 isValid = true;

@@ -43,11 +43,9 @@ public class BankAccount {
     }
 
     public void changePIN(int oldPIN, int newPIN) {
-        if (oldPIN != this.PIN){
-            throw new IllegalArgumentException("Error. Wrong PIN number");
+        if (validatePIN(oldPIN)){
+            this.PIN = newPIN;
         }
-
-        this.PIN = newPIN;
     }
 
 
@@ -61,10 +59,6 @@ public class BankAccount {
 
     public boolean validatePIN(int pin) {
         return pin == this.PIN;
-    }
-
-    public int getPIN() {
-        return PIN;
     }
 
     @Override

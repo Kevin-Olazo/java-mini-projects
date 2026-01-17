@@ -54,6 +54,10 @@ public class BankAccount {
     }
 
     public boolean validatePIN(int pin) {
+        if (pin != this.pin) {
+            throw new IllegalArgumentException("Incorrect pin");
+        }
+
         return pin == this.pin;
     }
 

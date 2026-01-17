@@ -256,9 +256,20 @@ public class BankSystem {
 
         if (account != null) {
             System.out.println("Enter your PIN:");
-            int pin = scanner.nextInt();
-            if (account.validatePIN(pin)) {
-                account.checkBalance();
+            int pin = 0;
+            if (scanner.hasNextInt()) {
+                pin = scanner.nextInt();
+                scanner.nextLine();
+                try {
+                    if (account.validatePIN(pin)) {
+                        account.checkBalance();
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+
+            } else {
+                System.out.println("Enter a valid PIN number");
             }
         } else {
             System.out.println("Account not found");

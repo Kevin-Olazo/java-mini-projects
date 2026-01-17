@@ -5,10 +5,8 @@ import java.util.Scanner;
 
 public class BankSystem {
 
-
     public static void main(String[] args) {
         ArrayList<BankAccount> bankAccounts = new ArrayList<>();
-
 
 
         Scanner scanner = new Scanner(System.in);
@@ -19,7 +17,7 @@ public class BankSystem {
         scanner.nextLine(); // clear the buffer
 
         switch (option) {
-            case 1 :
+            case 1:
                 BankAccount registerAccount = registerNewAccount();
                 bankAccounts.add(registerAccount);
 
@@ -31,31 +29,47 @@ public class BankSystem {
 
     }
 
-    public static BankAccount registerNewAccount() {
+    // REGISTER NEW ACCOUNT METHOD
+    // Registramos un nuevo usuario
 
+    public static BankAccount registerNewAccount() {
+        // Creamos un scanner
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter account number: ");
-        String accountNumber = scanner.nextLine();
+        // try-catch
+        try {
+            // Ingresamos el numero de cuenta
+            System.out.println("Enter account number: ");
+            String accountNumber = scanner.nextLine();
 
-        System.out.println("Enter name: ");
-        String name = scanner.nextLine();
+            // Ingresamos el nombre
+            System.out.println("Enter name: ");
+            String name = scanner.nextLine();
 
-        System.out.println("Enter balance: ");
-        double balance = scanner.nextDouble();
-        scanner.nextLine();
+            // Ingresamos el balance
+            System.out.println("Enter balance: ");
+            double balance = scanner.nextDouble();
+            scanner.nextLine();
 
-        System.out.println("Enter your PIN: ");
-        int PIN = scanner.nextInt();
-        scanner.nextLine();
+            // Ingresamos el PIN
+            System.out.println("Enter your PIN: ");
+            int PIN = scanner.nextInt();
+            scanner.nextLine();
 
-        BankAccount newAccount = new BankAccount(accountNumber, name, balance, PIN);
+            // Retornamos una nueva cuenta con los datos ingresados
+            return new BankAccount(accountNumber, name, balance, PIN);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
 
-        return newAccount;
+        scanner.close(); // Cerramos el scanner.
 
+        return null;
     }
 
-
+    // SHOW MENU METHOD
+    // Mostramos las opciones al usuario
 
     public static void showMenu() {
         System.out.println("====== MENU =======");

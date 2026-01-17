@@ -12,6 +12,9 @@ public class BankSystem {
         // Creamos un nuevo scanner para recibir los datos del usuario
         Scanner scanner = new Scanner(System.in);
 
+        BankAccount ba1 = new BankAccount("ASD", "Daniel", 100.00, 123);
+        bankAccounts.add(ba1);
+
         int option = 0;
 
         while (option != 7) {
@@ -25,9 +28,18 @@ public class BankSystem {
                 case 2:
                     depositMoney(bankAccounts);
                     break;
-
+                case 3:
+                   withdrawMoney(bankAccounts);
+                    break;
+                case 4:
+//                    checkBalance();
+                    break;
+                case 6:
+//                    displayAllAccounts();
+                    break;
                 case 7:
-
+//                    exit();
+                    break;
             }
         }
 
@@ -131,6 +143,32 @@ public class BankSystem {
             System.out.println("Escribe el monto a depositar:");
             double amount = scanner.nextDouble();
             ba.deposit(amount);
+        }
+        scanner.nextLine();
+
+    }
+
+    public static void withdrawMoney(ArrayList<BankAccount> bankAccounts) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Escribe el numero de cuenta a la que deseas depositar:");
+        BankAccount ba = null;
+
+        String accountNumber = scanner.nextLine();
+
+        for (BankAccount bas : bankAccounts) {
+            if (accountNumber.equals(bas.getAccountNumber())) {
+                ba = bas;
+                break;
+            } else {
+                System.out.println("No existe ese numero de cuenta");
+            }
+        }
+
+        if (ba != null) {
+            System.out.println("Escribe el monto a retirar:");
+            double amount = scanner.nextDouble();
+            ba.withdraw(amount);
         }
         scanner.nextLine();
 

@@ -173,12 +173,12 @@ public class BankSystem {
 
 
     public void depositMoney() {
+        BankAccount account = selectAccount();
 
-        System.out.println("Enter number account:");
-
-        String accNumber = scanner.nextLine();
-
-        BankAccount account = findBankAccount(accNumber);
+        if (account == null) {
+            System.out.println("Account not found");
+            return;
+        }
 
         if (account != null) {
             System.out.println("Enter the amount to deposit:");
@@ -210,50 +210,52 @@ public class BankSystem {
 
     public void withdrawMoney() {
 
-        System.out.println("Enter number account:");
-        String accNumber = scanner.nextLine();
+        BankAccount account = selectAccount();
 
-        BankAccount account = findBankAccount(accNumber);
-
-        if (account != null) {
-            System.out.println("Enter the amount to withdraw:");
-
-            if (scanner.hasNextDouble()) {
-                double amount = scanner.nextDouble();
-
-                try {
-                    account.withdraw(amount);
-                    System.out.println("Successfully withdraw $" + amount);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
-
-            } else {
-                System.out.println("Enter a valid amount to withdraw");
-            }
-
-        } else {
+        if (account == null) {
             System.out.println("Account not found");
+            return;
         }
 
-        scanner.nextLine();
+        if (!checkPin(account)) {
+            System.out.println("Wrong PIN.");
+            return;
+        }
+
+        System.out.println("Enter the amount to withdraw:");
+        if (!scanner.hasNextDouble()) {
+            scanner.next();
+            System.out.println("Enter a valid amount to withdraw");
+            return;
+        }
+
+        try {
+            double amount = scanner.nextDouble();
+            account.withdraw(amount);
+            System.out.println("Successfully withdraw $" + amount);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            scanner.nextLine();
+        }
+
+
     }
 
+
     public void checkBalance() {
+        BankAccount account = selectAccount();
 
-        System.out.println("Enter number account:");
-        String accNumber = scanner.nextLine();
-
-        BankAccount account = findBankAccount(accNumber);
-
-        if (account != null) {
-            if (checkPin(account)) {
-                account.checkBalance();
-            }
-
-        } else {
+        if (account == null) {
             System.out.println("Account not found");
+            return;
         }
+
+        if (!checkPin(account)) {
+            System.out.println("Wrong PIN.");
+            return;
+        }
+
+        account.checkBalance();
 
     }
 
@@ -262,33 +264,32 @@ public class BankSystem {
     public BankAccount selectAccount() {
         System.out.println("Enter number account:");
         String accNumber = scanner.nextLine();
-        BankAccount account = findBankAccount(accNumber);
-        return account;
+        return findBankAccount(accNumber);
     }
 
 
     public boolean checkPin(BankAccount account) {
         System.out.println("Enter your PIN");
-        int pin = 0;
+        int pin;
+
         try {
             pin = scanner.nextInt();
             scanner.nextLine();
         } catch (Exception e) {
-            System.out.println("Enter a valid PIN number");
-            checkPin(account);
+            System.out.println("checkPin - Enter a valid PIN number");
+            scanner.next();
+            return checkPin(account);
         }
+
         return account.validatePIN(pin);
     }
 
     public void changePIN() {
-
-        System.out.println("Enter number account:");
-        String accNumber = scanner.nextLine();
-
-        BankAccount account = findBankAccount(accNumber);
+        BankAccount account = selectAccount();
 
         if (account == null) {
-            System.out.println();
+            System.out.println("Account not found");
+            return;
         }
 
         if (account != null) {

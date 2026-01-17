@@ -35,7 +35,6 @@ public class BankAccount {
 
     public void checkBalance() {
         System.out.println("Current balance: $" + this.balance );
-
     }
 
     public void changePin(int oldPin, int newPin) {

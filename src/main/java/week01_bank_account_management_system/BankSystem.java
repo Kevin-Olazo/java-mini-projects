@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class BankSystem {
     ArrayList<BankAccount> bankAccounts;
+    Scanner scanner;
 
     public BankSystem() {
         this.bankAccounts = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
     }
 
     public static void main(String[] args) {
@@ -62,7 +64,6 @@ public class BankSystem {
 
     public void registerNewAccount() {
         // Creamos un scanner
-        Scanner scanner = new Scanner(System.in);
 
         // Ingresamos el numero de cuenta
         System.out.println("Enter account number: ");

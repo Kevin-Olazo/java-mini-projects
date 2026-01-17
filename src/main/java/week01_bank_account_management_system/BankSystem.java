@@ -202,7 +202,7 @@ public class BankSystem {
         if (account != null) {
             System.out.println("Enter your previous PIN");
             int oldPIN = scanner.nextInt();
-            if (oldPIN == account.getPIN()) {
+            if (account.validatePIN(oldPIN)) {
                 System.out.println("Enter your new PIN");
                 int newPIN = scanner.nextInt();
                 account.changePIN(oldPIN, newPIN);

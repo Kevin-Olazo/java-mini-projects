@@ -59,6 +59,10 @@ public class BankAccount {
         return holderName;
     }
 
+    public boolean validatePIN(int pin) {
+        return pin == this.PIN;
+    }
+
     public int getPIN() {
         return PIN;
     }

@@ -6,16 +6,20 @@ import java.util.Scanner;
 public class BankSystem {
 
     public static void main(String[] args) {
+        // Creamos una lista de las cuentas
         ArrayList<BankAccount> bankAccounts = new ArrayList<>();
 
-
+        // Creamos un nuevo scanner para recibir los datos del usuario
         Scanner scanner = new Scanner(System.in);
 
+        // Mostramos el menu
         showMenu();
 
+        // Recibimos la opción del usuario
         int option = scanner.nextInt();
         scanner.nextLine(); // clear the buffer
 
+        // Dependiendo de la opción seleccionada, ejecutamos el método
         switch (option) {
             case 1:
                 BankAccount registerAccount = registerNewAccount();
@@ -37,40 +41,57 @@ public class BankSystem {
         Scanner scanner = new Scanner(System.in);
 
         // try-catch
-        try {
-            // Ingresamos el numero de cuenta
-            System.out.println("Enter account number: ");
-            String accountNumber = scanner.nextLine();
 
-            // Ingresamos el nombre
-            System.out.println("Enter name: ");
-            String name = scanner.nextLine();
+        // Ingresamos el numero de cuenta
+        System.out.println("Enter account number: ");
+        String accountNumber = scanner.nextLine();
 
-            // Ingresamos el balance
+        // Ingresamos el nombre
+        System.out.println("Enter name: ");
+        String name = scanner.nextLine();
+
+        double balance = 0.00;
+        boolean isValid = false;
+
+        while (!isValid) {
+
             System.out.println("Enter balance: ");
-            double balance = scanner.nextDouble();
-            scanner.nextLine();
 
-            // Ingresamos el PIN
-            System.out.println("Enter your PIN: ");
-            int PIN = scanner.nextInt();
-            scanner.nextLine();
-
-            // Retornamos una nueva cuenta con los datos ingresados
-            return new BankAccount(accountNumber, name, balance, PIN);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            if (scanner.hasNextDouble()) {
+                balance = scanner.nextDouble();
+                isValid = true;
+            } else {
+                System.out.println("Enter a valid number");
+                scanner.next(); // Consume the invalid input to avoid an infinite loop
+            }
         }
 
-        scanner.close(); // Cerramos el scanner.
+        int PIN = 0;
 
-        return null;
+        while (!isValid) {
+
+            System.out.println("Enter your PIN: ");
+
+            if (scanner.hasNextInt()) {
+                balance = scanner.nextInt();
+                isValid = true;
+            } else {
+                System.out.println("Enter a valid PIN");
+                scanner.next(); // Consume the invalid input to avoid an infinite loop
+            }
+        }
+
+        scanner.nextLine();
+
+        scanner.close(); // Cerramos el scanner.
+        // Retornamos una nueva cuenta con los datos ingresados
+        return new BankAccount(accountNumber, name, balance, PIN);
+
+
     }
 
     // SHOW MENU METHOD
     // Mostramos las opciones al usuario
-
     public static void showMenu() {
         System.out.println("====== MENU =======");
         System.out.println("1. Create new account");

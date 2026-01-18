@@ -39,7 +39,7 @@ public class BankAccount {
 
     public void changePin(int oldPin, int newPin) {
         if (validatePIN(oldPin)){
-            if (newPin < 1000) {
+            if (newPin < 1000 || newPin > 9999) {
                 throw new IllegalArgumentException("Pin must be at least 4 digits");
             }
             this.pin = newPin;

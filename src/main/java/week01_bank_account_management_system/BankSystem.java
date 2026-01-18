@@ -150,7 +150,7 @@ public class BankSystem {
             if (scanner.hasNextInt()) {
                 pin = scanner.nextInt();
                 scanner.nextLine();
-                if (pin < 999) {
+                if (pin < 1000 || pin > 9999) {
                     System.out.println("PIN must be at least 4 digits");
                     continue;
                 }
@@ -204,7 +204,6 @@ public class BankSystem {
     }
 
     public void withdrawMoney() {
-
         BankAccount account = selectAccount();
 
         if (account == null) {
@@ -228,6 +227,7 @@ public class BankSystem {
             double amount = scanner.nextDouble();
             account.withdraw(amount);
             System.out.println("Successfully withdraw $" + amount);
+            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
             scanner.nextLine();
@@ -293,19 +293,22 @@ public class BankSystem {
 
 
     public boolean checkPin(BankAccount account) {
-        System.out.println("Enter your PIN");
-        int pin;
 
-        try {
-            pin = scanner.nextInt();
-            scanner.nextLine();
-        } catch (Exception e) {
-            System.out.println("checkPin - Enter a valid PIN number");
-            scanner.next();
-            return checkPin(account);
+        for (int attempts = 0; attempts < 3; attempts++) {
+            System.out.println("Enter your PIN:");
+            if (scanner.hasNextInt()) {
+                int pin = scanner.nextInt();
+                scanner.nextLine();
+                if (account.validatePIN(pin)) {
+                    return true;
+                }
+                System.out.println("Wrong PIN. " + (2 - attempts) + " attempts remaining.");
+            } else {
+                System.out.println("Invalid input.");
+                scanner.next();
+            }
         }
-
-        return account.validatePIN(pin);
+        return false;
     }
 
     // SHOW MENU METHOD

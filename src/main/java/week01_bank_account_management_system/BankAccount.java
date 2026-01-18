@@ -1,6 +1,7 @@
 package week01_bank_account_management_system;
 
 public class BankAccount {
+    private final double MIN_BALANCE = 100.00;
 
     // PRIVATE FIELDS
     private String accountNumber;
@@ -10,9 +11,25 @@ public class BankAccount {
 
     // CONSTRUCTOR
     public BankAccount(String accountNumber, String holderName, double balance, int pin) {
+        if (accountNumber == null || accountNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("Account number cannot be empty");
+        }
         this.accountNumber = accountNumber;
+
+        if (holderName == null || holderName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
         this.holderName = holderName;
+
+        if (balance < MIN_BALANCE ) {
+            throw new IllegalArgumentException("Minimum balance of $100.00");
+        }
         this.balance = balance;
+
+        if (pin < 1000 || pin > 9999) {
+            throw new IllegalArgumentException("PIN must be 4 digits");
+        }
+
         this.pin = pin;
     }
 
@@ -35,11 +52,11 @@ public class BankAccount {
     }
 
     public void checkBalance() {
-        System.out.printf("Current balance: $%.2f%n", this.balance );
+        System.out.printf("Current balance: $%.2f%n", this.balance);
     }
 
     public void changePIN(int oldPin, int newPin) {
-        if (validatePIN(oldPin)){
+        if (validatePIN(oldPin)) {
             if (newPin < 1000 || newPin > 9999) {
                 throw new IllegalArgumentException("Pin must be at least 4 digits");
             }

@@ -335,6 +335,11 @@ public class BankSystem {
     }
 
     public void displayAllAccounts() {
+        if (bankAccounts.isEmpty()) {
+            System.out.println("List is empty");
+            return;
+        }
+
         for (BankAccount ba : bankAccounts) {
             System.out.println(ba.toString());
         }

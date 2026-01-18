@@ -48,7 +48,7 @@ public class BankSystem {
                     system.checkBalance();
                     break;
                 case 5:
-                    system.changePIN();
+                    system.updatePIN();
                     break;
                 case 6:
                     system.displayAllAccounts();
@@ -211,7 +211,7 @@ public class BankSystem {
             return;
         }
 
-        if (!checkPin(account)) {
+        if (!verifyPIN(account)) {
             System.out.println("Wrong PIN.");
             return;
         }
@@ -245,7 +245,7 @@ public class BankSystem {
             return;
         }
 
-        if (!checkPin(account)) {
+        if (!verifyPIN(account)) {
             System.out.println("Wrong PIN.");
             return;
         }
@@ -256,7 +256,7 @@ public class BankSystem {
 
     //
 
-    public void changePIN() {
+    public void updatePIN() {
         BankAccount account = selectAccount();
 
         if (account == null) {
@@ -273,7 +273,7 @@ public class BankSystem {
                     System.out.println("Enter your new PIN");
                     int newPin = scanner.nextInt();
                     scanner.nextLine();
-                    account.changePin(oldPin, newPin);
+                    account.changePIN(oldPin, newPin);
                     System.out.println("PIN updated successfully!");
                 } else {
                     System.out.println("Wrong PIN");
@@ -292,7 +292,7 @@ public class BankSystem {
     }
 
 
-    public boolean checkPin(BankAccount account) {
+    public boolean verifyPIN(BankAccount account) {
 
         for (int attempts = 0; attempts < 3; attempts++) {
             System.out.println("Enter your PIN:");

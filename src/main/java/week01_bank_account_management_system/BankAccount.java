@@ -1,6 +1,7 @@
 package week01_bank_account_management_system;
 
 public class BankAccount {
+
     // PRIVATE FIELDS
     private String accountNumber;
     private String holderName;
@@ -34,10 +35,10 @@ public class BankAccount {
     }
 
     public void checkBalance() {
-        System.out.println("Current balance: $" + this.balance );
+        System.out.printf("Current balance: $%.2f%n", this.balance );
     }
 
-    public void changePin(int oldPin, int newPin) {
+    public void changePIN(int oldPin, int newPin) {
         if (validatePIN(oldPin)){
             if (newPin < 1000 || newPin > 9999) {
                 throw new IllegalArgumentException("Pin must be at least 4 digits");
@@ -62,6 +63,6 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return "Account number: " + getAccountNumber() + " Account holder: " + getHolderName();
+        return "Account number | " + getAccountNumber() + " Account holder | " + getHolderName();
     }
 }

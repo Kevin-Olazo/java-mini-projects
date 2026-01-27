@@ -1,7 +1,9 @@
 package week01_bank_account_management_system;
 
 public class BankAccount {
-    private final double MIN_BALANCE = 100.00;
+    private final static double MIN_BALANCE = 100.00;
+    private final static int MIN_PIN = 1000;
+    private final static int MAX_PIN = 9999;
 
     // PRIVATE FIELDS
     private String accountNumber;
@@ -26,7 +28,7 @@ public class BankAccount {
         }
         this.balance = balance;
 
-        if (pin < 1000 || pin > 9999) {
+        if (pin < MIN_PIN || pin > MAX_PIN) {
             throw new IllegalArgumentException("PIN must be 4 digits");
         }
 
@@ -57,8 +59,8 @@ public class BankAccount {
 
     public void changePIN(int oldPin, int newPin) {
         if (validatePIN(oldPin)) {
-            if (newPin < 1000 || newPin > 9999) {
-                throw new IllegalArgumentException("Pin must be at least 4 digits");
+            if (newPin < MIN_PIN || newPin > MAX_PIN) {
+                throw new IllegalArgumentException("Pin must be 4 digits");
             }
             this.pin = newPin;
         }

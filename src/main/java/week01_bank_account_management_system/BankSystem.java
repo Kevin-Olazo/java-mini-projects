@@ -106,7 +106,6 @@ public class BankSystem {
                     System.out.println("Enter a valid name");
                 } else {
                     isValid = true;
-
                 }
             }
 
@@ -163,7 +162,12 @@ public class BankSystem {
 
 
         // Retornamos una nueva cuenta con los datos ingresados
-        registerAccount(new BankAccount(accountNumber, name, balance, pin));
+        try {
+            registerAccount(new BankAccount(accountNumber, name, balance, pin));
+            System.out.println("Account created successfully!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Failed to create account: " + e.getMessage());
+        }
     }
 
     public void registerAccount(BankAccount account) {
@@ -185,7 +189,7 @@ public class BankSystem {
         // Validamos que sea número antes de leer
         if (scanner.hasNextDouble()) {
             double amount = scanner.nextDouble();
-
+            scanner.nextLine();
             // PROTEGEMOS EL CODIGO CON TRY-CATCH
             try {
                 account.deposit(amount);
@@ -223,14 +227,14 @@ public class BankSystem {
             return;
         }
 
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+
         try {
-            double amount = scanner.nextDouble();
             account.withdraw(amount);
             System.out.println("Successfully withdraw $" + amount);
-            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
-            scanner.nextLine();
         }
 
 
@@ -264,24 +268,11 @@ public class BankSystem {
             return;
         }
 
-        System.out.println("Enter your previous PIN");
-        if (scanner.hasNextInt()) {
-            int oldPin = scanner.nextInt();
-            scanner.nextLine();
-            try {
-                if (account.validatePIN(oldPin)) {
-                    System.out.println("Enter your new PIN");
-                    int newPin = scanner.nextInt();
-                    scanner.nextLine();
-                    account.changePIN(oldPin, newPin);
-                    System.out.println("PIN updated successfully!");
-                } else {
-                    System.out.println("Wrong PIN");
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+        if (!verifyPIN(account)) {
+            System.out.println("Incorrect PIN.");
         }
+
+
 
     }
 

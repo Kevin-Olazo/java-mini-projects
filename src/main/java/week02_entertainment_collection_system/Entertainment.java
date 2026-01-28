@@ -1,5 +1,7 @@
 package week02_entertainment_collection_system;
 
+import java.time.LocalDate;
+
 public abstract class Entertainment {
     protected String title;
     protected int releaseYear;
@@ -7,8 +9,8 @@ public abstract class Entertainment {
     protected boolean isAvailable;
 
     public Entertainment(String title, int releaseYear, double rating) {
-        this.title = title;
-        this.releaseYear = releaseYear;
+        setTitle(title);
+        setReleaseYear(releaseYear);
         this.rating = rating;
         this.isAvailable = true;
     }
@@ -18,6 +20,9 @@ public abstract class Entertainment {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be empty");
+        }
         this.title = title;
     }
 
@@ -26,6 +31,9 @@ public abstract class Entertainment {
     }
 
     public void setReleaseYear(int releaseYear) {
+        if (releaseYear > LocalDate.now().getYear()) {
+            throw new IllegalArgumentException("Year cannot be from future");
+        }
         this.releaseYear = releaseYear;
     }
 
@@ -34,6 +42,9 @@ public abstract class Entertainment {
     }
 
     public void setRating(double rating) {
+        if (rating < 0 || rating > 10) {
+            throw new IllegalArgumentException("Rating must be between 0 - 10");
+        }
         this.rating = rating;
     }
 
@@ -62,7 +73,7 @@ public abstract class Entertainment {
     public abstract double calculateValue();
 
     @Override
-    public String toString(){
+    public String toString() {
         return getInfo();
     }
 

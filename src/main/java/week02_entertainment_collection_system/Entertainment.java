@@ -54,7 +54,7 @@ public abstract class Entertainment {
     }
 
     public String getInfo() {
-        return title + " ( " + releaseYear + ") - Rating: " + rating + "/10";
+        return title + " (" + releaseYear + ") - Rating: " + rating + "/10";
     }
 
     public abstract void play();

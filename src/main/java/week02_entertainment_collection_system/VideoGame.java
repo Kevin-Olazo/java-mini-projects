@@ -14,9 +14,33 @@ public class VideoGame extends Entertainment {
         this.sizeInGB = sizeInGB;
     }
 
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public boolean isHasMultiplayer() {
+        return hasMultiplayer;
+    }
+
+    public void setHasMultiplayer(boolean hasMultiplayer) {
+        this.hasMultiplayer = hasMultiplayer;
+    }
+
+    public double getSizeInGB() {
+        return sizeInGB;
+    }
+
+    public void setSizeInGB(double sizeInGB) {
+        this.sizeInGB = sizeInGB;
+    }
+
     @Override
     public void play() {
-        System.out.println("Launching [" + getTitle() + "] on [" + platform + "]");
+        System.out.println("Launching " + getTitle() + " on " + platform);
     }
 
     @Override
@@ -28,7 +52,8 @@ public class VideoGame extends Entertainment {
         if (actualYear - getReleaseYear() <= 2) {
             basePrice = 60.00;
         } else if (actualYear - getReleaseYear() > 2) {
-            basePrice = 60.00 - ((actualYear - getReleaseYear()) - 2) * 10;
+            int rest = ((actualYear - getReleaseYear()) - 2) * 10;
+            basePrice = 60.00 - rest;
         }
 
         if (hasMultiplayer) {

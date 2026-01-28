@@ -10,18 +10,29 @@ public class Movie extends PhysicalMedia {
         this.genre = genre;
     }
 
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
     @Override
     public void play() {
-        System.out.println("Playing movie: [" + director + "]: [" + getTitle() + "]");
+        System.out.println("Playing movie: " + director + ": " + getTitle());
         super.play();
     }
 
-    @Override
-    public double calculateValue() {
-        return super.calculateValue();
-    }
-
     public String getGenreRecommendations(){
-      return genre;
+      return "Based on " + genre + " , you might like: " ;
     };
 }

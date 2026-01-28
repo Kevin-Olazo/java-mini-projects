@@ -38,7 +38,7 @@ public class PhysicalMedia extends Entertainment {
 
     @Override
     public void play() {
-        System.out.println("Inserting [" + mediaType + "] of [" + getTitle() + "]");
+        System.out.println("Inserting " + mediaType + " of " + getTitle());
     }
 
     @Override

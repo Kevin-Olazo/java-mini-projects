@@ -12,7 +12,7 @@ public class IndieGame extends VideoGame {
 
     @Override
     public void play() {
-        if (isEarlyAccess){
+        if (isEarlyAccess) {
             System.out.println("Early Access");
         }
         super.play();
@@ -27,7 +27,7 @@ public class IndieGame extends VideoGame {
         return super.calculateValue();
     }
 
-    public void supportDeveloper(){
+    public void supportDeveloper() {
         System.out.println("I support the developer");
     }
 }

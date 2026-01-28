@@ -10,28 +10,34 @@ public class AAAGame extends VideoGame {
         this.hasDLC = hasDLC;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public boolean isHasDLC() {
+        return hasDLC;
+    }
+
+    public void setHasDLC(boolean hasDLC) {
+        this.hasDLC = hasDLC;
+    }
+
     @Override
     public void play() {
-        System.out.println("Kojima Productions presents: ");
+        System.out.println(publisher + " Productions presents: ");
         super.play();
     }
 
     @Override
     public double calculateValue() {
-        if (!hasDLC) {
-            return super.calculateValue();
-
-        }
-        return super.calculateValue() + 14.90;
-
+        return hasDLC ? super.calculateValue() + 14.90 : super.calculateValue();
     }
 
     public String checkDLCAvailable() {
-        if (!hasDLC) {
-            return "No DLC Available";
-
-        } else {
-            return "DLC Available";
-        }
+        return hasDLC ? "DLC Available" : "No DLC Available";
     }
 }

@@ -10,9 +10,25 @@ public class Series extends PhysicalMedia {
         this.episodesPerSeason = episodesPerSeason;
     }
 
+    public int getEpisodesPerSeason() {
+        return episodesPerSeason;
+    }
+
+    public void setEpisodesPerSeason(int episodesPerSeason) {
+        this.episodesPerSeason = episodesPerSeason;
+    }
+
+    public int getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(int seasons) {
+        this.seasons = seasons;
+    }
+
     @Override
     public void play() {
-        System.out.println("Binge-watching [" + getTitle() + "]");
+        System.out.println("Binge-watching " + getTitle());
         super.play();
     }
 
@@ -23,9 +39,7 @@ public class Series extends PhysicalMedia {
         }
 
         return super.calculateValue();
-    }
-
-    ;
+    };
 
     public int getTotalEpisodes() {
         return seasons * episodesPerSeason;

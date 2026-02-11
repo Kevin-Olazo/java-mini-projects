@@ -49,28 +49,47 @@ public class RegistrationSystem {
         return false;
     }
 
-    public Set<String> findStudentsWithSameCourses(){
-        List<Student> lista = new ArrayList<>(students.values());
-        Set<String> parejas = new HashSet<>();
+//    public Set<String> findStudentsWithSameCourses() {
+//        List<Student> lista = new ArrayList<>(students.values());
+//        Set<String> parejas = new HashSet<>();
+//
+//        for (int i = 0; i < lista.size(); i++) {
+//            for (int j = i + 1; j < lista.size(); j++) {
+//                Student s1 = lista.get(i);
+//                Student s2 = lista.get(j);
+//
+//                if (s1.getEnlistedCourses().equals(s2.getEnlistedCourses())) {
+//                    parejas.add(s1.getId());
+//                    parejas.add(s2.getId());
+//                    System.out.println("Encontramos una pareja");
+//                    System.out.println(s1.getName() + " " + s2.getName());
+//                }
+//            }
+//        }
+//
+//        return parejas;
+//    }
 
-        Map<Set<Course>, Set<Student>>  grupos = new HashMap<>();
+    public Map<Set<String>, List<String>> findStudentsWithSameCourses() {
+        // 1. Creamos el mapa organizador
+        Map<Set<String>, List<String>> grupos = new HashMap<>();
 
+        // 2. Recorremos todos los estudiantes
+        for (Student s : students.values()) {
+            Set<String> horario = s.getEnlistedCourses();
 
-        for(int i = 0; i < lista.size(); i++){
-            for (int j = i + 1; j < lista.size(); j++){
-                Student s1 = lista.get(i);
-                Student s2 = lista.get(j);
-
-                if (s1.getEnlistedCourses().equals(s2.getEnlistedCourses())){
-                    parejas.add(s1.getId());
-                    parejas.add(s2.getId());
-                    System.out.println("Encontramos una pareja");
-                    System.out.println(s1.getName() + " " + s2.getName());
-                }
+            // PASO CLAVE: Verificar si ya existe una "cubeta" para este horario
+            if (!grupos.containsKey(horario)) {
+                // Si NO existe, creamos una lista nueva vacía y la ponemos en el mapa
+                grupos.put(horario, new ArrayList<>());
             }
+
+            // Ahora estamos 100% seguros de que la lista existe.
+            // La recuperamos y añadimos al estudiante actual.
+            grupos.get(horario).add(s.getId());
         }
 
-        return parejas;
+        return grupos;
     }
 
     public Set<String> findCommonCourses(String studentId1, String studentId2){

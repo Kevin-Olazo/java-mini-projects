@@ -6,6 +6,7 @@ import java.util.Set;
 public class Course {
     private String code;
     private String name;
+    private Integer studentLimit;
     private Set<String> enlistedStudents;
 
     public Course() {

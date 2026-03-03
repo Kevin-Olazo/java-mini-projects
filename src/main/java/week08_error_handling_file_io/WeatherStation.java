@@ -9,7 +9,7 @@ public class WeatherStation {
         this.dataLogger = dataLogger;
     }
 
-    public void takeAndSaveReading() throws SensorOfflineException, InvalidReadingException  {
+    public void takeAndSaveReading() throws SensorOfflineException  {
 
       double chances = Math.random();
       System.out.println(chances);
@@ -19,9 +19,9 @@ public class WeatherStation {
       }
 
       try {
-          double temp = Math.random();
-          double humidity = Math.random();
-          double pressure = Math.random();
+          double temp = (Math.random() * (50 - -50 + 1)) + -50;
+          double humidity = (Math.random() * (100 - 0 + 1)) + 0;
+          double pressure = (Math.random() * (1100 - 900 + 1)) + 900;
 
           WeatherReading newReading = new WeatherReading(temp, humidity, pressure, LocalDateTime.now());
 
@@ -29,7 +29,6 @@ public class WeatherStation {
       } catch (InvalidReadingException e) {
           System.out.println("Error al grabar reading");
       }
-
 
     }
 

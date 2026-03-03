@@ -9,22 +9,36 @@ public class WeatherApp {
         DataLogger dataLogger = new DataLogger();
         WeatherStation weatherStation = new WeatherStation(dataLogger);
 
-//        for (int i = 0; i < 10; i++) {
-//
-//            try {
-//                weatherStation.takeAndSaveReading();
-//            } catch (SensorOfflineException e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//        }
+        for (int i = 0; i < 10; i++) {
 
+            try {
+                weatherStation.takeAndSaveReading();
+            } catch (SensorOfflineException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
 
         try  {
             List<WeatherReading> listReadings = dataLogger.loadReadings(LocalDate.now());
-            for (WeatherReading r : listReadings){
-                System.out.println(r.toString());
+            if (!listReadings.isEmpty()){
+                double minTemp = listReadings.get(0).getTemperature();
+                double maxTemp = listReadings.get(0).getTemperature();
+                double sumTemp = 0;
+
+                for (WeatherReading r : listReadings){
+                    System.out.println(r.toString());
+                    minTemp = Math.min(minTemp, r.getTemperature());
+                    maxTemp = Math.max(maxTemp, r.getTemperature());
+                    sumTemp += r.getTemperature();
+                }
+
+                double average = sumTemp / listReadings.size();
+                System.out.println("Min temperature: " + minTemp);
+                System.out.println("Max temperature: " + maxTemp);
+                System.out.println("Average temperature: " + average);
             }
+
 
         } catch (CorruptDataException e) {
             System.out.println(e.getMessage());

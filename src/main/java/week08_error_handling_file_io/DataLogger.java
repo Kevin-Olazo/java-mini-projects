@@ -3,10 +3,7 @@ package week08_error_handling_file_io;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public class DataLogger {
         Path filePath = Paths.get(fileName);
 
         // 2. Escribimos el reading usando try-with-resources para atrapar el error y cerrar el recurso automáticamente
-
+        backup(filePath);
         // Abrimos el writer, si no existe CREATE, si existe APPEND
         try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             // Escribimos el reading y usamos toString
@@ -41,6 +38,8 @@ public class DataLogger {
         List<WeatherReading> readings = new ArrayList<>();
 
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
+
+
             String line;
 
             while ((line = reader.readLine()) != null) {
@@ -68,5 +67,21 @@ public class DataLogger {
         }
 
         return readings;
+    }
+
+    private void backup(Path mainPath){
+        LocalDate date = LocalDate.now();
+
+        String backup = mainPath.getFileName().toString() + ".bak";
+        Path backupPath = Paths.get(backup);
+
+        try {
+            if (Files.exists(mainPath)) {
+                Files.copy(mainPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al crear archivo de respaldo ");
+        }
     }
 }

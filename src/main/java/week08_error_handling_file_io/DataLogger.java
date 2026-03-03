@@ -45,6 +45,9 @@ public class DataLogger {
 
             while ((line = reader.readLine()) != null) {
                 try {
+                    if (line.isEmpty()){
+                        continue;
+                    }
                     //
                     String[] readingData = line.split(",");
                     double temp = Double.parseDouble(readingData[0]);

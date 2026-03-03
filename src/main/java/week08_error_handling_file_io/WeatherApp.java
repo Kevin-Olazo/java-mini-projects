@@ -9,15 +9,15 @@ public class WeatherApp {
         DataLogger dataLogger = new DataLogger();
         WeatherStation weatherStation = new WeatherStation(dataLogger);
 
-        for (int i = 0; i < 10; i++) {
-
-            try {
-                weatherStation.takeAndSaveReading();
-            } catch (SensorOfflineException e) {
-                System.out.println(e.getMessage());
-            }
-
-        }
+//        for (int i = 0; i < 10; i++) {
+//
+//            try {
+//                weatherStation.takeAndSaveReading();
+//            } catch (SensorOfflineException e) {
+//                System.out.println(e.getMessage());
+//            }
+//
+//        }
 
 
         try  {

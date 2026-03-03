@@ -1,5 +1,6 @@
 package week08_error_handling_file_io;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,6 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataLogger {
 
@@ -28,5 +32,38 @@ public class DataLogger {
             System.out.println("Hubo un error al grabar el reading");
         }
 
+
+    }
+
+    public List<WeatherReading> loadReadings(LocalDate date) throws CorruptDataException, IOException {
+        String fileName = "weather_" + date + ".log";
+        Path filePath = Paths.get(fileName);
+        List<WeatherReading> readings = new ArrayList<>();
+
+        try (BufferedReader reader = Files.newBufferedReader(filePath)) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                try {
+                    //
+                    String[] readingData = line.split(",");
+                    double temp = Double.parseDouble(readingData[0]);
+                    double humidity = Double.parseDouble(readingData[1]);
+                    double pressure = Double.parseDouble(readingData[2]);
+                    LocalDateTime timestamp = LocalDateTime.parse(readingData[3]);
+                    readings.add(new WeatherReading(temp, humidity, pressure, timestamp));
+
+                } catch (NumberFormatException e) {
+                    throw new CorruptDataException("Error de formato numero en la linea: " + line, e);
+                } catch (Exception e) {
+                    throw new CorruptDataException("Dato corrupto en la linea: " + line, e);
+                }
+
+            }
+
+
+        }
+
+        return readings;
     }
 }

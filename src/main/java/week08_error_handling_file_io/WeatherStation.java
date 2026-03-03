@@ -10,18 +10,21 @@ public class WeatherStation {
     }
 
     public void takeAndSaveReading() throws SensorOfflineException  {
-
       double chances = Math.random();
-      System.out.println(chances);
 
       if (chances <= 0.10){
           throw new SensorOfflineException("Error: el sensor esta desconectado");
       }
 
       try {
-          double temp = (Math.random() * (50 - -50 + 1)) + -50;
-          double humidity = (Math.random() * (100 - 0 + 1)) + 0;
-          double pressure = (Math.random() * (1100 - 900 + 1)) + 900;
+          double temp = -50 + Math.random() * (50 - (-50));
+          double humidity = Math.random() * (100);
+          double pressure = 900 + Math.random() * (1100 - 900);
+
+
+          temp = Math.round(temp * 10) / 10.0;
+          humidity = Math.round(humidity * 10) / 10.0;
+          pressure = Math.round(pressure * 10) / 10.0;
 
           WeatherReading newReading = new WeatherReading(temp, humidity, pressure, LocalDateTime.now());
 
